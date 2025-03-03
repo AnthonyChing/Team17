@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Pomodoro Timer</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<nav>
+		<h1>Pomodoro Timer</h1>
+		<ul>
+			<li><a href="index.html">Project</a></li>
+			<li><a href="about.html">Subject</a></li>
+		</ul>
+	</nav>
+	<div class="container">
+		<div class="set-fruit">
+			Set your fruit:
+			<select id="fruit">
+				<option value="apple">Apple</option>
+				<option value="banana">Banana</option>
+				<option value="grapes">Grapes</option>
+				<option value="kiwi">Kiwi</option>
+				<option value="orange">Orange</option>
+				<option value="pear">Pear</option>
+				<option value="strawberry">Strawberry</option>
+				<option value="watermelon">Watermelon</option>
+			</select>
+		</div>
+		<div class="timer">
+			<div class="time">
+				<span id="minutes">25</span>:<span id="seconds">00</span>
+			</div>
+			<div class="buttons">
+				<button id="start">Start</button>
+				<button id="pause">Pause</button>
+				<button id="reset">Reset</button>
+			</div>
+		</div>
+		<div class="set-timer">
+			Set your timer:
+			<select id="timer">
+				<option value="25">25 minutes</option>
+				<option value="5">5 minutes</option>
+				<option value="10">10 minutes</option>
+				<option value="15">15 minutes</option>
+				<option value="20">20 minutes</option>
+				<option value="30">30 minutes</option>
+				<option value="35">35 minutes</option>
+				<option value="40">40 minutes</option>
+				<option value="45">45 minutes</option>
+				<option value="50">50 minutes</option>
+				<option value="55">55 minutes</option>
+				<option value="60">60 minutes</option>
+			</select>
+		</div>
+		<div class="set-break">
+			Set your break:
+			<select id="break">
+				<option value="5">5 minutes</option>
+				<option value="10">10 minutes</option>
+				<option value="15">15 minutes</option>
+				<option value="20">20 minutes</option>
+				<option value="25">25 minutes</option>
+				<option value="30">30 minutes</option>
+				<option value="35">35 minutes</option>
+				<option value="40">40 minutes</option>
+				<option value="45">45 minutes</option>
+				<option value="50">50 minutes</option>
+				<option value="55">55 minutes</option>
+				<option value="60">60 minutes</option>
+			</select>
+		</div>
+	</div>
+	<div class="records">
+		<h2>Records</h2>
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Time</th>
+				<th>Break</th>
+			</tr>
+			<tr>
+				<td>Task 1</td>
+				<td>25 minutes</td>
+				<td>5 minutes</td>
+			</tr>
+			<tr>
+				<td>Task 2</td>
+				<td>25 minutes</td>
+				<td>5 minutes</td>
+			</tr>
+			<tr>
+				<td>Task 3</td>
+				<td>25 minutes</td>
+				<td>5 minutes</td>
+			</tr>
+			<tr>
+				<td>Task 4</td>
+				<td>25 minutes</td>
+				<td>5 minutes</td>
+			</tr>
+			<tr>
+				<td>Task 5</td>
+				<td>25 minutes</td>
+				<td>5 minutes</td>
+			</tr>
+		</table>
+	</div>
+	<footer>
+		<p>Created by Aaron, Anthony, Jason, and Uranus</p>
+	</footer>
+	<script src="script.js"></script>
+</body>
+</html>
