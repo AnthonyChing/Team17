@@ -1,16 +1,79 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 200vh;
+    margin: 0;
+}
+
 nav {
+    /* flex-shrink: 0; */
 	display: flex;
   	justify-content: space-between;
+    flex-direction: column;
  	align-items: center;
-  	padding: 1rem 2rem;
-  	background-color: #f8f9fa;
-  	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  	/* padding: 1rem 2rem; */
+    height: 10vh;
 }
 
 nav h1 {
 	font-size: 1.5rem;
+    padding: 0.5rem;
+    margin: 0;
 }
 
 nav ul {
 	display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    /* flex-grow: 1; */
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center; 
+    height: 90vh; 
+}
+.set-fruit{
+    width: 15%; 
+    text-align: center;
+    padding-right: 20px;
+}
+.timer{
+    width: 50%; 
+    text-align: center;
+    /* padding: 20px; */
+}
+.set-time{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+	padding-left: 20px;
+}
+.time{
+	text-align: center;
+	align-items: center;
+}
+.break{
+	text-align: center;
+	align-items: center;
+}
+.records{
+    display: flex;
+    flex-direction: column; 
+    justify-content: top; 
+    align-items: center; 
+    height: 90vh; 
+}
+footer{
+    align-items: center; 
+    text-align: center;
+    height: 10vh;
 }
