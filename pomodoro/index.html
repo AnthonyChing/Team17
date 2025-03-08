@@ -29,8 +29,28 @@
 		</div>
 		<div class="panel timer">
 			<div class="time">
-				<span id="minutes">25</span>:<span id="seconds">00</span>
+				<input type="""text" id="minuteInput" value="25" onclick="this.select()" oninput="validateMinute(this)"> :
+				<input type="text" id="secondInput" value="00" onclick="this.select()" oninput="validateSecond(this)">
 			</div>
+			<script>
+				function validateMinute(input) {
+					const minutePattern = /^([0-9]{1,2})$/;
+					if (minutePattern.test(input.value) && input.value >= 0 && input.value <= 59) {
+						input.style.borderColor = '';
+					} else {
+						input.style.borderColor = 'red';
+					}
+				}
+
+				function validateSecond(input) {
+					const secondPattern = /^([0-9]{1,2})$/;
+					if (secondPattern.test(input.value) && input.value >= 0 && input.value <= 59) {
+						input.style.borderColor = '';
+					} else {
+						input.style.borderColor = 'red';
+					}
+				}
+			</script>
 			<div class="buttons">
 				<button id="start">Start</button>
 				<button id="pause">Pause</button>
@@ -76,38 +96,31 @@
 	</div>
 	<div class="records">
 		<h2>Records</h2>
-		<table>
-			<tr>
-				<th>Task</th>
-				<th>Time</th>
-				<th>Break</th>
-			</tr>
-			<tr>
-				<td>Task 1</td>
-				<td>25 minutes</td>
-				<td>5 minutes</td>
-			</tr>
-			<tr>
-				<td>Task 2</td>
-				<td>25 minutes</td>
-				<td>5 minutes</td>
-			</tr>
-			<tr>
-				<td>Task 3</td>
-				<td>25 minutes</td>
-				<td>5 minutes</td>
-			</tr>
-			<tr>
-				<td>Task 4</td>
-				<td>25 minutes</td>
-				<td>5 minutes</td>
-			</tr>
-			<tr>
-				<td>Task 5</td>
-				<td>25 minutes</td>
-				<td>5 minutes</td>
-			</tr>
-		</table>
+		<div class="record">
+			<p><strong>Task:</strong> Task 1</p>
+			<p><strong>Time:</strong> 25 minutes</p>
+			<p><strong>Break:</strong> 5 minutes</p>
+		</div>
+		<div class="record">
+			<p><strong>Task:</strong> Task 2</p>
+			<p><strong>Time:</strong> 25 minutes</p>
+			<p><strong>Break:</strong> 5 minutes</p>
+		</div>
+		<div class="record">
+			<p><strong>Task:</strong> Task 3</p>
+			<p><strong>Time:</strong> 25 minutes</p>
+			<p><strong>Break:</strong> 5 minutes</p>
+		</div>
+		<div class="record">
+			<p><strong>Task:</strong> Task 4</p>
+			<p><strong>Time:</strong> 25 minutes</p>
+			<p><strong>Break:</strong> 5 minutes</p>
+		</div>
+			<div class="record">
+			<p><strong>Task:</strong> Task 5</p>
+			<p><strong>Time:</strong> 25 minutes</p>
+			<p><strong>Break:</strong> 5 minutes</p>
+			</div>
 	</div>
 	<footer>
 		<p>Created by Aaron, Anthony, Jason, and Uranus</p>

@@ -1,3 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #d8c1a6, #c6a8a8); /* Morandi colors */
+    color: #333;
+}
+
+nav {
+    background: rgba(211, 192, 182, 0.9); /* Morandi color */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(211, 192, 182, 0.2);
+}
+
+nav a {
+    transition: color 0.3s ease;
+}
+
+.panel {
+    background-color: #e4d7d0; /* Morandi color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.timer {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    background: rgba(255, 218, 185, 0.8); /* PeachPuff with transparency */
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timer input {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100px; /* Adjust width as needed */
+}
+
+.timer input::-webkit-outer-spin-button,
+.timer input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.timer input[type=number] {
+    appearance: textfield;
+}
+
+.timer .buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.timer .buttons button {
+    background-color: #ff6347; /* Tomato */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.timer .buttons button:hover {
+    background-color: #ff4500; /* OrangeRed */
+}
+
+.records th, .records td {
+    transition: background-color 0.3s ease;
+}
+
+.records th:hover, .records td:hover {
+    background-color: rgba(184, 169, 161, 0.1); /* Morandi color */
+}
+
+footer {
+    background: rgba(211, 192, 182, 0.9); /* Morandi color */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(211, 192, 182, 0.2);
+}
 body {
     display: flex;
     flex-direction: column;
@@ -14,7 +114,62 @@ nav {
   	/* padding: 1rem 2rem; */
     height: 10vh;
 }
-
+nav {
+    background-color: #ffdead; /* NavajoWhite */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+}
+nav a {
+    text-decoration: none;
+    color: #ff6347; /* Tomato */
+    font-weight: bold;
+}
+nav a:hover {
+    color: #ff4500; /* OrangeRed */
+}
+.panel {
+    background-color: #ffe4c4; /* Bisque */
+    border: 1px solid #ff8c00; /* DarkOrange */
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.panel .time {
+    font-size: 2rem;
+    color: #ff6347; /* Tomato */
+}
+.panel .buttons button {
+    background-color: #ff6347; /* Tomato */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.panel .buttons button:hover {
+    background-color: #ff4500; /* OrangeRed */
+}
+.records table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.records th, .records td {
+    border: 1px solid #ff8c00; /* DarkOrange */
+    padding: 0.5rem;
+    text-align: center;
+}
+.records th {
+    background-color: #ffdead; /* NavajoWhite */
+}
+footer {
+    background-color: #ffdead; /* NavajoWhite */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
 nav h1 {
 	font-size: 1.5rem;
     padding: 0.5rem;
@@ -65,13 +220,30 @@ nav ul {
 	text-align: center;
 	align-items: center;
 }
-.records{
+.records {
+    width: 100%;
+    margin: 2rem 0;
+    text-align: center; /* Center align the text */
     display: flex;
-    flex-direction: column; 
-    justify-content: top; 
-    align-items: center; 
-    height: 90vh; 
+    flex-direction: column;
+    align-items: center; /* Center align the records container */
 }
+
+.record {
+    display: block;
+    justify-content: center; /* Center align the records */
+    margin-bottom: 1rem; /* Add space between records */
+    padding: 1rem;
+    border: 1px solid #ff8c00; /* DarkOrange */
+    background-color: #ffdead; /* NavajoWhite */
+    border-radius: 8px;
+}
+
+.records .record p {
+    margin: 0;
+    padding: 0 1rem;
+}
+
 footer{
     align-items: center; 
     text-align: center;
