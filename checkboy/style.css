@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#gameCanvas, #UICanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: auto;
+}
+
+#gameCanvas {
+    z-index: 1;  
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#UICanvas {
+    z-index: 2; 
+}
