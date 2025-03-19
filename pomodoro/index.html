@@ -9,8 +9,8 @@
 	<nav>
 		<h1>Pomodoro Timer</h1>
 		<ul>
-			<li><a href="index.html">Project</a></li>
-			<li><a href="about.html">Subject</a></li>
+			<li><a href="index.html">Timer</a></li>
+			<li><a href="#records">Records</a></li>
 		</ul>
 	</nav>
 	<div class="container">
@@ -47,7 +47,7 @@
 		</div>
 		<div class="panel timer">
 			<div class="time">
-				<input type="""text" id="minuteInput" value="25" onclick="this.select()" oninput="validateMinute(this)"> :
+				<input type="text" id="minuteInput" value="25" onclick="this.select()" oninput="validateMinute(this)"> :
 				<input type="text" id="secondInput" value="00" onclick="this.select()" oninput="validateSecond(this)">
 			</div>
 			<script>
@@ -112,7 +112,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="records">
+	<div class="records" id="records">
 		<h2>Records</h2><br/>
 		<div class="record">
 			<p><strong>Task:</strong> Task 1</p>
