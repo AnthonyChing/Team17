@@ -4,7 +4,22 @@
 	<meta charset="UTF-8">
 	<title>Pomodoro Timer</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<!-- React -->
+	<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+	<!-- Babel -->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
+<script type="text/babel">
+	// Fetch and evaluate the external JSX file
+	fetch("App.jsx")
+		.then(response => response.text())
+		.then(code => Babel.transform(code, { presets: ['react'] }).code)
+		.then(transformedCode => eval(transformedCode))
+		.catch(error => console.error("Error loading JSX:", error));
+</script>
+<div id="root"></div>
+<!--  We should move this into App.jsx -->
 <body>
 	<nav>
 		<h1>Pomodoro Timer</h1>
@@ -112,6 +127,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- We can delete this right? -->
 	<div class="records" id="records">
 		<h2>Records</h2><br/>
 		<div class="record">
@@ -143,6 +159,5 @@
 	<footer>
 		<p>Created by Aaron, Anthony, Jason, and Uranus</p>
 	</footer>
-	<script src="script.js"></script>
 </body>
 </html>
