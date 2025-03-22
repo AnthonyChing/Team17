@@ -1,5 +1,6 @@
 const { useState } = React;
-
+import SettingPanel from "./SettingPanel.js";
+import TimerInstance from "./TimerInstance.js";
 class TimerInstance {
     constructor(task, taskTime, breakTime, fruit) {
         this.task = task;
@@ -69,6 +70,7 @@ function App() {
     // We can change HTML for this
     return (
         <React.Fragment>
+            <SettingPanel />
             <div className="TaskQueue">
                 {taskQueue.map((task, index) => (
                     <TaskBlock key={index} {...task} />

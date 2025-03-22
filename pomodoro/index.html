@@ -18,7 +18,9 @@
 		.then(transformedCode => eval(transformedCode))
 		.catch(error => console.error("Error loading JSX:", error));
 </script>
-<div id="root"></div>
+<body>
+	<div id="root"></div>
+</body>
 <!--  We should move this into App.jsx -->
 <body>
 	<nav>
@@ -28,6 +30,7 @@
 			<li><a href="#records">Records</a></li>
 		</ul>
 	</nav>
+	<div id="settingPanel"></div>
 	<div class="container">
 		<div class="panel set-fruit">
 			<div class="fruit">
