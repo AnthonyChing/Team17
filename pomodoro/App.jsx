@@ -199,19 +199,24 @@ function App() {
 
     // Adds a task to the task queue on the left
     function addTask(instance){
-        const temp = new TimerInstance("TEST", 25, 5, "APPLE")
-        setTaskQueue([...taskQueue, temp])
+        setTaskQueue([...taskQueue, instance])
     }
 
-    // Removes the top task from the task queue and puts it in the finished queue
-    function finishTask(){
+    // Returns the top task from the task queue
+    function popTask(){
         if(taskQueue.length < 1){
             console.log("taskQueue underflow!");
             return;
         }
-        const finishedTask = taskQueue[0];
-        taskQueue.shift(1);
-        setDoneQueue([...doneQueue, finishedTask]);
+        const task = taskQueue[0];
+        const newQueue = taskQueue.slice(1);
+        setTaskQueue(newQueue);
+        return task;
+    }
+
+    // Adds a task to the finished queue on the right
+    function addFinishedTask(instance){
+        setDoneQueue([...doneQueue, instance]);
     }
 
     // We can change HTML for this
@@ -231,8 +236,9 @@ function App() {
                 ))}
             </div>
             {/* Just for testing, can remove */}
-            <button onClick={addTask}>Add Task</button>
-            <button onClick={finishTask}>Remove Top Task</button>
+            <button onClick={() => addTask(new TimerInstance("TEST", 25, 5, "APPLE"))}>Add Task</button>
+            <button onClick={popTask}>Remove Top Task</button>
+            <button onClick={() => addFinishedTask(new TimerInstance("TEST", 25, 5, "APPLE"))}>Finish Task</button>
         </React.Fragment>
     );
 }
