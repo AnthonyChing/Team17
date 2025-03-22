@@ -8,10 +8,7 @@ class TimerInstance {
     }
 }
 
-const exampleTask = new TimerInstance('Example Task', 25, 5);
-const taskArray = [];
-taskArray.push(exampleTask);
-function SettingPanel() {
+function SettingPanel(props) {
     return (
         <div>
         <div className="fruit">
@@ -68,7 +65,7 @@ function SettingPanel() {
 			</div>
         </div>
         <div>
-            <button onClick={addCheck} id="save">Add</button>
+            <button onClick={addCheck} id="save">Add Task</button>
 		</div>
 		</div>
 	);
@@ -83,11 +80,8 @@ function SettingPanel() {
 		} else {
 			alert(`Task ${task} added`);
 			const newTask = new TimerInstance(task, taskTime, breakTime);
-			taskArray.push(newTask);
+            props.addTask(newTask);
 			document.getElementById('task').value = '';
-			for (let i = 0; i < taskArray.length; i++) {
-				console.log(taskArray[i]);
-			}
 		}
 	}
 }
@@ -223,7 +217,7 @@ function App() {
     return (
         <React.Fragment>
             {/* <Header /> */}
-            <SettingPanel />
+            <SettingPanel addTask={addTask}/>
             <div className="TaskQueue">
                 {taskQueue.map((task, index) => (
                     <TaskBlock key={index} {...task} />
