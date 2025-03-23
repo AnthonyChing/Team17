@@ -32,6 +32,7 @@ function SettingPanel(props) {
 			<div className="time">
 				Set your timer:
 				<select id="time" defaultValue={25}>
+					<option value="1">1 minute</option>
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
 					<option value="15">15 minutes</option>
@@ -49,6 +50,7 @@ function SettingPanel(props) {
 			<div className="break">
 				Set your break:
 				<select id="break">
+					<option value="1">1 minute</option>
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
 					<option value="15">15 minutes</option>
@@ -112,40 +114,108 @@ function Header() {
     )
 }
 
-function Timer() {
-    function validateMinute(input) {
-        const minutePattern = /^([0-9]{1,2})$/;
-        if (minutePattern.test(input) && input >= 0 && input <= 59) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+function Timer(props) {
+    const [time, setTime] = useState({ minute: 25, second: 0 });
+    const [isRunning, setIsRunning] = useState(false);
+    const [intervalId, setIntervalId] = useState(null);
+    const [currentTask, setCurrentTask] = useState(null);
+    const [currentTimerType, setCurrentTimerType] = useState("task"); // "task" or "break"
+    const [showTaskInfo, setShowTaskInfo] = useState(false);
 
-    function validateSecond(input) {
-        const secondPattern = /^([0-9]{1,2})$/;
-        if (secondPattern.test(input) && input >= 0 && input <= 59) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    const [minute, setMinute] = useState(25);
-    const [second, setSecond] = useState('00');
-
-    const handleMinuteChange = (e) => {
-        const value = e.target.value;
-        if (validateMinute(value)) {
-            setMinute(value);
+    const startTimer = (type = "task") => {
+        setCurrentTimerType(type);
+        if (!isRunning) {
+            setIsRunning(true);
+            const id = setInterval(() => {
+                setTime((prevTime) => {
+                    const { minute, second } = prevTime;
+                    if (minute === 0 && second === 0) {
+                        clearInterval(id);
+                        playAlarm();
+                        showNotification(type);
+                        return { minute: 0, second: 0 }; // Ensure timer stops at 0
+                    }
+                    if (second === 0) {
+                        return { minute: minute - 1, second: 59 };
+                    }
+                    return { minute, second: second - 1 };
+                });
+            }, 1000);
+            setIntervalId(id);
         }
     };
 
-    const handleSecondChange = (e) => {
-        const value = e.target.value;
-        if (validateSecond(value)) {
-            setSecond(value);
+    const pauseTimer = () => {
+        setIsRunning(false);
+        clearInterval(intervalId);
+    };
+
+    const nextTask = () => {
+        setIsRunning(false);
+        clearInterval(intervalId);
+
+        const task = props.popTask();
+        if (!task) {
+            const notification = document.createElement('div');
+            notification.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+                    <p>Please add a task first!</p>
+                    <button id="gotItButton">Got it</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            document.getElementById('gotItButton').addEventListener('click', () => {
+                document.body.removeChild(notification);
+            });
+            return;
         }
+
+        setCurrentTask(task);
+        setTime({ minute: task.taskTime, second: 0 });
+        setShowTaskInfo(true); // Show task info after the first click
+    };
+
+    const playAlarm = () => {
+        const audio = new Audio('alarm.mp3');
+        audio.loop = true;
+        audio.play();
+        window.alarmAudio = audio; // Store reference to stop later
+    };
+
+    const stopAlarm = () => {
+        if (window.alarmAudio) {
+            window.alarmAudio.pause();
+            window.alarmAudio.currentTime = 0;
+        }
+    };
+
+    const showNotification = (type) => {
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+                <p>${type === "task" ? "Task time is up!" : "Break time is up!"}</p>
+                <button id="gotItButton">Got it</button>
+            </div>
+        `;
+        document.body.appendChild(notification);
+
+        document.getElementById('gotItButton').addEventListener('click', () => {
+            stopAlarm();
+            document.body.removeChild(notification);
+
+            if (type === "task") {
+                // Start break timer
+                setTime({ minute: currentTask.breakTime, second: 0 });
+                startTimer("break");
+            } else if (type === "break") {
+                // Add finished task to DoneQueue
+                if (currentTask) {
+                    props.addFinishedTask(currentTask);
+                    setCurrentTask(null);
+                }
+            }
+        });
     };
 
     return (
@@ -154,31 +224,37 @@ function Timer() {
                 <input 
                     type="text" 
                     id="minuteInput" 
-                    value={minute} 
+                    value={time.minute} 
                     onClick={(e) => e.target.select()} 
-                    onChange={handleMinuteChange} 
-                    style={{ borderColor: validateMinute(minute) ? '' : 'red' }}
+                    onChange={(e) => setTime({ ...time, minute: parseInt(e.target.value) || 0 })} 
+                    style={{ borderColor: time.minute >= 0 && time.minute <= 59 ? '' : 'red' }}
                 /> 
                 :
                 <input 
                     type="text" 
                     id="secondInput" 
-                    value={second} 
+                    value={time.second} 
                     onClick={(e) => e.target.select()} 
-                    onChange={handleSecondChange} 
-                    style={{ borderColor: validateSecond(second) ? '' : 'red' }}
+                    onChange={(e) => setTime({ ...time, second: parseInt(e.target.value) || 0 })} 
+                    style={{ borderColor: time.second >= 0 && time.second <= 59 ? '' : 'red' }}
                 />
             </div>
             <div className="buttons">
-                <button id="start">Start</button>
-                <button id="pause">Pause</button>
-                <button id="reset">Reset</button>
+                <button id="start" onClick={() => startTimer("task")}>Start</button>
+                <button id="pause" onClick={pauseTimer}>Pause</button>
+                <button id="next" onClick={nextTask}>Next</button>
             </div>
+            {currentTask && (
+                <h3 style={{ display: showTaskInfo ? "block" : "none" }}>
+                    {currentTimerType === "task"
+                        ? `Currently working on task: ${currentTask.task}, focusing ${currentTask.taskTime} minutes with break time ${currentTask.breakTime} minutes`
+                        : `Currently taking a break after task: ${currentTask.task}, focusing ${currentTask.taskTime} minutes with break time ${currentTask.breakTime} minutes`}
+                </h3>
+            )}
         </div>
     );
 }
 
-// Use to replace HTML
 function Footer() {
     return (
         <footer>
@@ -191,16 +267,14 @@ function App() {
     const [taskQueue, setTaskQueue] = useState([]);
     const [doneQueue, setDoneQueue] = useState([]);
 
-    // Adds a task to the task queue on the left
-    function addTask(instance){
-        setTaskQueue([...taskQueue, instance])
+    function addTask(instance) {
+        setTaskQueue([...taskQueue, instance]);
     }
 
-    // Returns the top task from the task queue
-    function popTask(){
-        if(taskQueue.length < 1){
+    function popTask() {
+        if (taskQueue.length < 1) {
             console.log("taskQueue underflow!");
-            return;
+            return null;
         }
         const task = taskQueue[0];
         const newQueue = taskQueue.slice(1);
@@ -208,34 +282,41 @@ function App() {
         return task;
     }
 
-    // Adds a task to the finished queue on the right
-    function addFinishedTask(instance){
+    function addFinishedTask(instance) {
         setDoneQueue([...doneQueue, instance]);
     }
 
-    // We can change HTML for this
     return (
         <React.Fragment>
-            {/* <Header /> */}
-            <SettingPanel addTask={addTask}/>
-            <div className="TaskQueue">
-                {taskQueue.map((task, index) => (
-                    <TaskBlock key={index} {...task} />
-                ))}
+            <nav>
+                <h1>Pomodoro Timer</h1>
+            </nav>
+            <div className="container">
+                <div className="panel">
+                    <h2>Task Settings</h2>
+                    <SettingPanel addTask={addTask} />
+                    <div className="TaskQueue">
+                        <h3>Task Queue</h3>
+                        {taskQueue.map((task, index) => (
+                            <TaskBlock key={index} {...task} />
+                        ))}
+                    </div>
+                </div>
+                <div className="panel">
+                    <h2>Timer</h2>
+                    <Timer popTask={popTask} addFinishedTask={addFinishedTask} />
+                </div>
+                <div className="panel">
+                    <h2>Task Records</h2>
+                    <div className="DoneQueue">
+                        {doneQueue.map((task, index) => (
+                            <TaskBlock key={index} {...task} />
+                        ))}
+                    </div>
+                </div>
             </div>
-            <Timer />
-            <div className="DoneQueue">
-                {doneQueue.map((task, index) => (
-                    <TaskBlock key={index} {...task} />
-                ))}
-            </div>
-            {/* Just for testing, can remove */}
-            <button onClick={() => addTask(new TimerInstance("TEST", 25, 5, "APPLE"))}>Add Task</button>
-            <button onClick={popTask}>Remove Top Task</button>
-            <button onClick={() => addFinishedTask(new TimerInstance("TEST", 25, 5, "APPLE"))}>Finish Task</button>
         </React.Fragment>
     );
 }
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
