@@ -11,26 +11,29 @@ class TimerInstance {
 function SettingPanel(props) {
     return (
         <div>
-        <div className="fruit">
-            Set your fruit:<br/>
-            <select id="fruit">
-                <option value="apple">Apple</option>
-                <option value="banana">Banana</option>
-                <option value="grapes">Grapes</option>
-                <option value="kiwi">Kiwi</option>
-                <option value="orange">Orange</option>
-                <option value="pear">Pear</option>
-                <option value="strawberry">Strawberry</option>
-                <option value="watermelon">Watermelon</option>
-            </select>
+        <div className="taskContainer">
+            <div className="fruit">
+                <pre className="orange-font">   Fruit options   </pre>
+                <select id="fruit">
+                    <option value="apple">Apple</option>
+                    <option value="banana">Banana</option>
+                    <option value="grapes">Grapes</option>
+                    <option value="kiwi">Kiwi</option>
+                    <option value="orange">Orange</option>
+                    <option value="pear">Pear</option>
+                    <option value="strawberry">Strawberry</option>
+                    <option value="watermelon">Watermelon</option>
+                </select>
+            </div>
+		    <div className="task orange-font">
+			    <label htmlFor="task" ><pre>   Task name   </pre></label>
+			    <input type="text" id="task" name="tname" ></input>
+		    </div>
         </div>
-		<div className="task">
-			<label htmlFor="task">Set your task:</label>
-			<input type="text" id="task" name="tname" ></input>
-		</div>
-        <div className="panel set-time">
-			<div className="time">
-				Set your timer:
+        <br/>
+        <div className="taskContainer">
+            <div className="orange-font">
+                <pre>   WorkTime   <br/></pre>
 				<select id="time" defaultValue={25}>
 					<option value="1">1 minute</option>
 					<option value="5">5 minutes</option>
@@ -47,8 +50,8 @@ function SettingPanel(props) {
 					<option value="60">60 minutes</option>
 				</select>
 			</div>
-			<div className="break">
-				Set your break:
+            <div className="orange-font">
+                <pre>   BreakTime   <br/></pre>
 				<select id="break">
 					<option value="1">1 minute</option>
 					<option value="5">5 minutes</option>
@@ -66,10 +69,15 @@ function SettingPanel(props) {
 				</select>
 			</div>
         </div>
-        <div>
-            <button onClick={addCheck} id="save">Add Task</button>
-		</div>
-		</div>
+        <br/>
+        <div className="taskContainer">
+            <div></div>
+            <div className="buttons">
+                <button onClick={addCheck} id="save">Add Task</button>
+		    </div>
+            <div></div>
+        </div>
+        </div>
 	);
 	
 	function addCheck() {
@@ -219,11 +227,12 @@ function Timer(props) {
     };
 
     return (
-        <div className="panel timer">
+        <div className="">
             <div className="time">
                 <input 
-                    type="text" 
-                    id="minuteInput" 
+                    type="number" 
+                    id="minuteInput"
+                    class="timeInput"
                     value={time.minute} 
                     onClick={(e) => e.target.select()} 
                     onChange={(e) => setTime({ ...time, minute: parseInt(e.target.value) || 0 })} 
@@ -231,18 +240,19 @@ function Timer(props) {
                 /> 
                 :
                 <input 
-                    type="text" 
+                    type="number" 
                     id="secondInput" 
+                    class="timeInput"
                     value={time.second} 
                     onClick={(e) => e.target.select()} 
                     onChange={(e) => setTime({ ...time, second: parseInt(e.target.value) || 0 })} 
                     style={{ borderColor: time.second >= 0 && time.second <= 59 ? '' : 'red' }}
                 />
-            </div>
             <div className="buttons">
                 <button id="start" onClick={() => startTimer("task")}>Start</button>
                 <button id="pause" onClick={pauseTimer}>Pause</button>
                 <button id="next" onClick={nextTask}>Next</button>
+            </div>
             </div>
             {currentTask && (
                 <h3 style={{ display: showTaskInfo ? "block" : "none" }}>
@@ -251,6 +261,7 @@ function Timer(props) {
                         : `Currently taking a break after task: ${currentTask.task}, focusing ${currentTask.taskTime} minutes with break time ${currentTask.breakTime} minutes`}
                 </h3>
             )}
+
         </div>
     );
 }
@@ -292,22 +303,27 @@ function App() {
                 <h1>Pomodoro Timer</h1>
             </nav>
             <div className="container">
-                <div className="panel">
-                    <h2>Task Settings</h2>
-                    <SettingPanel addTask={addTask} />
+                <div className="panel queueWidth">
                     <div className="TaskQueue">
-                        <h3>Task Queue</h3>
+                        <h2 className="black-topic">Task Queue</h2>
                         {taskQueue.map((task, index) => (
                             <TaskBlock key={index} {...task} />
                         ))}
                     </div>
                 </div>
-                <div className="panel">
-                    <h2>Timer</h2>
-                    <Timer popTask={popTask} addFinishedTask={addFinishedTask} />
+                <div className="middleContainer">
+                    <div className="panel middleWidth">
+                        <h2 className="black-topic">Timer</h2>
+                        <Timer popTask={popTask} addFinishedTask={addFinishedTask} />
+                    </div>
+                    <br/>
+                    <div className="panel middleWidth">
+                        <h2 className="black-topic">Task Settings</h2>
+                        <SettingPanel addTask={addTask} />
+                    </div>
                 </div>
-                <div className="panel">
-                    <h2>Task Records</h2>
+                <div className="panel queueWidth">
+                    <h2 className="black-topic">Task Records</h2>
                     <div className="DoneQueue">
                         {doneQueue.map((task, index) => (
                             <TaskBlock key={index} {...task} />
@@ -315,6 +331,7 @@ function App() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </React.Fragment>
     );
 }

@@ -37,6 +37,7 @@ body {
     color: #ff6347; /* Tomato */
     font-weight: bold;
 }
+
 #root nav a:hover {
     color: #ff4500; /* OrangeRed */
 }
@@ -67,10 +68,12 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 #root .timer {
     font-size: 3rem;
     color: #ff6347; /* Tomato */
-    background: rgba(255, 218, 185, 0.8); /* PeachPuff with transparency */
+    
+    background: rgba(255, 218, 185, 0.8); 
     padding: 1rem 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,42 +82,59 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
 }
 
-#root .timer input {
+#root .time input {
     font-size: 3rem;
     color: #ff6347; /* Tomato */
+    
     background: transparent;
     border: none;
     text-align: center;
     width: 100px; /* Adjust width as needed */
+    
 }
 
-#root .timer input::-webkit-outer-spin-button,
-#root .timer input::-webkit-inner-spin-button {
+#root .time input::-webkit-outer-spin-button,
+#root .time input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+    
 }
 
-#root .timer input[type=number] {
+#root .time input[type=number] {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100px; /* Adjust width as needed */
     appearance: textfield;
 }
 
-#root .timer .buttons {
+#root .time .buttons {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center;   
     gap: 1rem;
 }
 
-#root .timer .buttons button {
+#root .time .buttons button {
     background-color: #ff6347; /* Tomato */
     color: white;
     border: none;
     border-radius: 4px;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    align-items: center;
+    text-align: center;   
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 #root .timer .buttons button:hover {
@@ -132,14 +152,23 @@ body {
 #root .panel {
     background-color: #ffe4c4; /* Bisque */
     border: 1px solid #ff8c00; /* DarkOrange */
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+#root .middleWidth{
+    width: 500px;
+}
+#root .queueWidth{
+    width: 200px;
+}
+
 #root .panel .time{
     font-size: 1.5rem;
     color: #ff6347; /* Tomato */
 }
+
 #root .panel .buttons button {
     background-color: #ff6347; /* Tomato */
     color: white;
@@ -149,19 +178,25 @@ body {
     margin: 0.5rem;
     cursor: pointer;
     font-size: 1rem;
+    align-items: center;
+    text-align: center;   
 }
+
 #root .panel .buttons button:hover {
     background-color: #ff4500; /* OrangeRed */
 }
+
 #root .records table {
     width: 100%;
     border-collapse: collapse;
 }
+
 #root .records th, #root .records td {
     border: 1px solid #ff8c00; /* DarkOrange */
     padding: 0.5rem;
     text-align: center;
 }
+
 #root .records th {
     background-color: #ffdead; /* NavajoWhite */
 }
@@ -174,30 +209,56 @@ body {
     margin-top: 10vh; /* Offset for fixed nav bar */
     padding: 1rem;
 }
+
+#root .middleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#root .taskContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #root .set-fruit{
     width: 15%; 
     text-align: center;
     padding-right: 20px;
 }
-#root .timer{
-    width: 50%; 
-    text-align: center;
-    /* padding: 20px; */
-}
+
+
 #root .set-time{
 	display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 15%;
 	padding-left: 20px;
 }
+
+#root .orange-font{
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+    align-items: center;
+	text-align: center;
+}
+
+#root .black-topic{
+    font-size: 1.5rem;
+    color:black;
+    align-items: center;
+	text-align: center;
+}
+
 #root .fruit{
 	text-align: center;
 	align-items: center;
     font-size: 1.5rem;
     color: #ff6347; /* Tomato */
 }
+
 #root .subject{
 	text-align: center;
 	align-items: center;
@@ -211,12 +272,14 @@ body {
     font-size: 1.5rem;
     color: #ff6347; /* Tomato */
 }
+
 #root .break{
 	text-align: center;
 	align-items: center;
     font-size: 1.5rem;
     color: #ff6347; /* Tomato */
 }
+
 #root .records {
     color: white;
     width: 100%;

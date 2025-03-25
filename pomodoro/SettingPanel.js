@@ -7,7 +7,7 @@ function SettingPanel() {
     return (
         <>
         <div className="fruit">
-            Set your fruit:<br/>
+            <div className="orange-font">Set your fruit:<br/> </div>
             <select id="fruit">
                 <option value="apple">Apple</option>
                 <option value="banana">Banana</option>
@@ -20,12 +20,12 @@ function SettingPanel() {
             </select>
         </div>
 		<div className="task">
-			<label htmlFor="task">Set your task:</label>
+			<label htmlFor="task" className="orange-font">Set your task:<br/></label>
 			<input type="text" id="task" name="tname" ></input>
 		</div>
-        <div className="panel set-time">
+        <div className="set-time">
 			<div className="time">
-				Set your timer:
+            	<div className="orange-font">Set your timer:<br/> </div>
 				<select id="time" defaultValue={25}>
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
@@ -42,7 +42,7 @@ function SettingPanel() {
 				</select>
 			</div>
 			<div className="break">
-				Set your break:
+            	<div className="orange-font">Set your break:<br/> </div>
 				<select id="break">
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
