@@ -7,7 +7,7 @@
 ## 組員分工情況 (共100%)，並清楚的標示你們是哪一組 (組別)
 ### Team 17
 - 林靖昀（25%）
-
+    - 利用 React, Javascript implement task queue & task records
 - 金哲安（25%）
     - 利用 React, Javascript 完成 Timer 邏輯
     - CSS 救火
