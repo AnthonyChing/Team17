@@ -14,3 +14,5 @@
 - 林子庭 (25%)
 
 - 宋和峻（25%）
+    - 利用 React, Javascript 完成設定面板的製作和與紀錄的連動
+    - 利用 React, Javascript 將原本的web用React生成
