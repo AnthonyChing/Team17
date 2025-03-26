@@ -16,8 +16,7 @@
 - 宋和峻（25%）
     - 設定 task queue 的使用邏輯
 ## 網頁使用方式
-- 打開終端機進入pomodoro的資料夾，輸入指令`python3 -m http.server [想連線的port]`
-- 本地瀏覽器網址輸入`localhost:[想連線的port]`，即可瀏覽本網頁
+- 打開終端機進入pomodoro的資料夾，輸入指令`python3 -m http.server 8080`
 - 這是一個番茄鐘網頁
 - 使用`Task Settings`設定番茄鐘的水果類型、工作名稱、工作時間、休息時間
 - 使用`Timer`彈性設定計時器
