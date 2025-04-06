@@ -295,6 +295,31 @@ function App() {
 
     function addFinishedTask(instance) {
         setDoneQueue([...doneQueue, instance]);
+    
+        // Send POST request to Django backend
+        fetch("/add_finished_task/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                task: instance.task,
+                taskTime: instance.taskTime,
+                breakTime: instance.breakTime,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to save task to the database");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data.message);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
     }
 
     return (

@@ -16,5 +16,12 @@
 	<script type="text/babel" src="{% static 'jsx/App.jsx' %}"></script>
     <div id="root"></div>
     <audio id="alarm" src="{% static 'mp3/alarm.mp3' %}" preload="auto"></audio>
+	{% for record in records %}
+		<div class="record" style="background-color: aqua;">
+			<p>Task: {{ record.task }}</p>
+			<p>Focused for: {{ record.taskTime }}</p>
+			<p>Break time: {{ record.breakTime }}</p>
+		</div>
+	{% endfor %}
 </body>
 </html>

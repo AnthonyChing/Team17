@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mainsite.views import homepage
+from mainsite.views import add_finished_task
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage)
+    path('', homepage),
+	path("add_finished_task/", add_finished_task, name="add_finished_task"),
 ]

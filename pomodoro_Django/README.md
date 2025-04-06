@@ -11,3 +11,13 @@ pip install -r requirement.txt
 ```bash=
 python manage.py runserver <optional: localhost:<desired port>>
 ```
+## About the database
+Admin account: anthony  
+Password: anthony  
+Or create your own superuser
+
+POST url at /add_finished_task/  
+expects a json containing  
+task (str)  
+taskTime = (timedelta)  
+breakTime = (timedelta)  
