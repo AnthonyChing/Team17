@@ -185,7 +185,7 @@ function Timer(props) {
     };
 
     const playAlarm = () => {
-        const audio = new Audio('alarm.mp3');
+        const audio = new Audio('/static/mp3/alarm.mp3'); // Update the path to include /static
         audio.loop = true;
         audio.play();
         window.alarmAudio = audio; // Store reference to stop later
