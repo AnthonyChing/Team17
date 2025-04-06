@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url("images/background.png");
+    background-size: cover; /* 確保完整顯示圖片 */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#root nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    background-color: #ffdead; /* NavajoWhite */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+#root nav a {
+    transition: color 0.3s ease;
+    text-decoration: none;
+    color: #ff6347; /* Tomato */
+    font-weight: bold;
+}
+
+#root nav a:hover {
+    color: #ff4500; /* OrangeRed */
+}
+
+#root nav h1 {
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+    text-align: center;
+    margin: 0;
+}
+
+#root nav ul {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#root .panel {
+    background-color: #e4d7d0; /* Morandi color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#root .panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#root .timer {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    
+    background: rgba(255, 218, 185, 0.8); 
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+#root .time input {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100px; /* Adjust width as needed */
+    
+}
+
+#root .time input::-webkit-outer-spin-button,
+#root .time input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    
+}
+
+#root .time input[type=number] {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato */
+    
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100px; /* Adjust width as needed */
+    appearance: textfield;
+}
+
+#root .time .buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;   
+    gap: 1rem;
+}
+
+#root .time .buttons button {
+    background-color: #ff6347; /* Tomato */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;   
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+#root .timer .buttons button:hover {
+    background-color: #ff4500; /* OrangeRed */
+}
+
+#root .records th, #root .records td {
+    transition: background-color 0.3s ease;
+}
+
+#root .records th:hover, #root .records td:hover {
+    background-color: rgba(184, 169, 161, 0.1); /* Morandi color */
+}
+
+#root .panel {
+    background-color: #ffe4c4; /* Bisque */
+    border: 1px solid #ff8c00; /* DarkOrange */
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#root .middleWidth{
+    width: 500px;
+}
+#root .queueWidth{
+    width: 200px;
+}
+
+#root .panel .time{
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+}
+
+#root .panel .buttons button {
+    background-color: #ff6347; /* Tomato */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    align-items: center;
+    text-align: center;   
+}
+
+#root .panel .buttons button:hover {
+    background-color: #ff4500; /* OrangeRed */
+}
+
+#root .records table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#root .records th, #root .records td {
+    border: 1px solid #ff8c00; /* DarkOrange */
+    padding: 0.5rem;
+    text-align: center;
+}
+
+#root .records th {
+    background-color: #ffdead; /* NavajoWhite */
+}
+
+#root .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90vh; /* Remaining height after nav bar */
+    margin-top: 10vh; /* Offset for fixed nav bar */
+    padding: 1rem;
+}
+
+#root .middleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#root .taskContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#root .set-fruit{
+    width: 15%; 
+    text-align: center;
+    padding-right: 20px;
+}
+
+
+#root .set-time{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	padding-left: 20px;
+}
+
+#root .orange-font{
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+    align-items: center;
+	text-align: center;
+}
+
+#root .black-topic{
+    font-size: 1.5rem;
+    color:black;
+    align-items: center;
+	text-align: center;
+}
+
+#root .fruit{
+	text-align: center;
+	align-items: center;
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+}
+
+#root .subject{
+	text-align: center;
+	align-items: center;
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+}
+
+#root .time{
+	text-align: center;
+	align-items: center;
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+}
+
+#root .break{
+	text-align: center;
+	align-items: center;
+    font-size: 1.5rem;
+    color: #ff6347; /* Tomato */
+}
+
+#root .records {
+    color: white;
+    width: 100%;
+    margin: 2rem 0;
+    text-align: center; /* Center align the text */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the records container */
+}
+
+#root .record {
+    color: black;
+    display: block;
+    justify-content: center; /* Center align the records */
+    margin-bottom: 1rem; /* Add space between records */
+    padding: 1rem;
+    border: 1px solid #ff8c00; /* DarkOrange */
+    background-color: #ffdead; /* NavajoWhite */
+    border-radius: 8px;
+}
+
+#root .records .record p {
+    margin: 0;
+    padding: 0 1rem;
+}
+
+#root footer{
+    align-items: center; 
+    text-align: center;
+    height: 10vh;
+    flex:1;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(211, 192, 182, 0.2);
+    background-color: #ffdead; /* NavajoWhite */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
