@@ -7,6 +7,8 @@
 ## 組員分工情況 (共100%)，並清楚的標示你們是哪一組 (組別)
 ### Team 17
 - 林靖昀（25%）
+    - 利用 HTTP POST & GET 更新 Database 與 query database
+    - 調整 JSX & CSS
 - 金哲安（25%）
     - 利用 Django 建立 Database
     - 利用 HTTP POST 更新 Database

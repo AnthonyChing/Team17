@@ -18,10 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from mainsite.views import homepage
 from mainsite.views import add_finished_task
+from mainsite.views import get_finished_tasks
+from mainsite.views import delete_finished_task
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
 	path("add_finished_task/", add_finished_task, name="add_finished_task"),
+	path("get_finished_tasks/", get_finished_tasks, name="get_finished_tasks"),
+	path("delete_finished_task/", delete_finished_task, name="delete_finished_task"),
 ]

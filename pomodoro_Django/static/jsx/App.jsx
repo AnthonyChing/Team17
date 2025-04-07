@@ -1,10 +1,12 @@
+const { useEffect } = React;
 const { useState } = React;
 class TimerInstance {
-    constructor(task, taskTime, breakTime, fruit) {
+    constructor(task, taskTime, breakTime, fruit, id) {
         this.task = task;
         this.taskTime = taskTime;
         this.breakTime = breakTime;
         this.fruit = fruit;
+        this.id = id;
     }
 }
 
@@ -96,13 +98,47 @@ function SettingPanel(props) {
 	}
 }
 
-function TaskBlock(instance) { 
-    // We can change HTML for this
+
+function TaskBlock({trigger, ...instance}) { 
+    function deleteTask() {
+        if(instance.id === undefined){
+            console.log("No ID found for this task instance.");
+            return;
+        }
+        // Send POST request to Django backend to delete the task
+        fetch("/delete_finished_task/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: instance.id,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to delete task from the database");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data.message);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        trigger((prev) => !prev);
+    }
     return (
-        <div className="TimerInstance">
-            {instance.task} {instance.fruit}
-            <br></br>
-            {instance.taskTime} {instance.breakTime}
+        <div className="TimerInstance, panel">
+            <div>
+                <strong>Task:&nbsp;</strong>{instance.task}<br></br>
+                <strong>Task&nbsp;Time:&nbsp;</strong>{instance.taskTime}&nbsp;<br></br>
+                <strong>Break&nbsp;Time:&nbsp;</strong>{instance.breakTime}&nbsp;<br></br>
+            </div> 
+            <div className="buttons">
+                <button id="delete" onClick={deleteTask}>Delete</button>
+            </div>
         </div>
     );
 }
@@ -277,6 +313,30 @@ function Footer() {
 function App() {
     const [taskQueue, setTaskQueue] = useState([]);
     const [doneQueue, setDoneQueue] = useState([]);
+    const [refresh, setRefresh] = useState(false);
+
+    useEffect(() => {
+        fetch("/get_finished_tasks/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch finished tasks");
+                }
+                return response.json();
+
+            })
+            .then((data) => {
+                console.log("Finished tasks:", data);
+                setDoneQueue(data.tasks.map((task) => new TimerInstance(task.task, task.taskTime, task.breakTime, "fruit", task.id)));
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }, [refresh]);
 
     function addTask(instance) {
         setTaskQueue([...taskQueue, instance]);
@@ -294,7 +354,6 @@ function App() {
     }
 
     function addFinishedTask(instance) {
-        setDoneQueue([...doneQueue, instance]);
     
         // Send POST request to Django backend
         fetch("/add_finished_task/", {
@@ -320,6 +379,8 @@ function App() {
             .catch((error) => {
                 console.error("Error:", error);
             });
+        setRefresh(!refresh);
+        
     }
 
     return (
@@ -328,12 +389,16 @@ function App() {
                 <h1>Pomodoro Timer</h1>
             </nav>
             <div className="container">
-                <div className="panel queueWidth">
-                    <div className="TaskQueue">
-                        <h2 className="black-topic">Task Queue</h2>
-                        {taskQueue.map((task, index) => (
-                            <TaskBlock key={index} {...task} />
-                        ))}
+                <div>
+                    <div className="panel queueWidth">
+                        <div className="TaskQueue">
+                            <h2 className="black-topic">Task Queue</h2>
+                        </div>
+                        <div>
+                            {taskQueue.map((task, index) => (
+                                <TaskBlock key={index} {...task} />
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div className="middleContainer">
@@ -347,11 +412,13 @@ function App() {
                         <SettingPanel addTask={addTask} />
                     </div>
                 </div>
-                <div className="panel queueWidth">
-                    <h2 className="black-topic">Task Records</h2>
+                <div className="rightContainer">
+                    <div className="panel queueWidth">
+                        <h2 className="black-topic">Task Records</h2>
+                    </div>
                     <div className="DoneQueue">
                         {doneQueue.map((task, index) => (
-                            <TaskBlock key={index} {...task} />
+                            <TaskBlock key={index} {...task} trigger={setRefresh}/>
                         ))}
                     </div>
                 </div>

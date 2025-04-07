@@ -48,3 +48,39 @@ def parse_duration(minutes_str):
         return timedelta(hours=int(minutes_str)//60, minutes=int(minutes_str)%60, seconds=0)
     except ValueError:
         raise ValueError(f"Invalid duration format: {minutes_str}")
+
+
+@csrf_exempt
+def get_finished_tasks(request):
+    if request.method == "GET":
+        try:
+            tasks = Record.objects.all()
+            tasks_list = []
+            for tasks in tasks:
+                tasks_list.append({
+                    "id": str(tasks.id),
+                    "task": tasks.task,
+                    "taskTime": str(tasks.taskTime),
+                    "breakTime": str(tasks.breakTime),
+                })
+
+            return JsonResponse({"tasks": tasks_list}, status=200)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
+@csrf_exempt
+def delete_finished_task(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print("Received data:", data)  # Log the received data
+            task_id = data.get("id")
+            Record.objects.filter(id=task_id).delete()
+            print("Deleted task with ID:", task_id)  # Log the deleted task ID
+
+            return JsonResponse({"message": "Task deleted successfully!"}, status=200)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=405)

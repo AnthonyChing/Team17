@@ -164,6 +164,27 @@ body {
     width: 200px;
 }
 
+.rightContainer {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;
+}
+
+.panel.queueWidth {
+    text-align: center;
+    width: 200px;
+}
+
+.doneQueue {
+    width: 100%;  
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1; 
+}
+
 #root .panel .time{
     font-size: 1.5rem;
     color: #ff6347; /* Tomato */
