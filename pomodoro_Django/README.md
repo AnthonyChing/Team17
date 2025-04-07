@@ -21,3 +21,10 @@ expects a json containing
 task (str)  
 taskTime = (timedelta)  
 breakTime = (timedelta)  
+
+POST /delete_finished_task/
+expects a json containing
+id = (id) (the built-in id within the database)
+
+GET /get_finished_tasks/
+returns a json containing a list of tasks
