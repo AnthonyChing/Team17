@@ -13,6 +13,15 @@
     - 利用 Django 建立 Database
     - 利用 HTTP POST 更新 Database
 - 林子庭 (25%)
-
+    - 建立docker image 並上傳
 - 宋和峻（25%）
     - 將原本的網頁與 Django 進行整合
+
+## docker image 相關資訊
+- docker image 連結：https://hub.docker.com/repository/docker/jasonlin778/pomodoro/general
+- 執行下列指令(記得先啟動docker)：
+```
+docker pull jasonlin778/pomodoro:latest
+docker run -p 8000:8000 jasonlin778/pomodoro
+```
+- 瀏覽器輸入`localhost:8000`瀏覽網站
